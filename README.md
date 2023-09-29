@@ -1,6 +1,6 @@
-# driver_drowsiness_detection
+# Driver Drowsiness Detection
 
-This is a deep learning powered application that detects whether the driver who is driving the vehicle is sleeping or not sleeping.
+This is a deep learning-powered application that detects whether the driver who is driving the vehicle is sleeping or not sleeping.
 
 ## How to Run?
 
@@ -12,13 +12,13 @@ Clone the repository
 https://github.com/surajkarki66/driver_drowsiness_detection
 ```
 
-### STEP 01- install the requirements
+#### STEP 01- install the requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### STEP 02- Run the server
+#### STEP 02- Run the server
 
 ```bash
 # Finally run the following command
@@ -31,7 +31,7 @@ To access the admin panel click here: `http://127.0.0.1:8000/admin`
 
 #### Admin Credentials
 
-- email: admin@admin.com
-- password: admin@123
+1. Email: admin@admin.com
+2. Password: admin@123
 
 Note: There are also lots of REST APIs available that you can check.
