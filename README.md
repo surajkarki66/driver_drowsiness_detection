@@ -25,13 +25,13 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
-Now, open the web browser and goes to the given address: `http://127.0.0.1:8000/`
+Now, open the web browser and go to the given address: `http://127.0.0.1:8000/`
 
 To access the admin panel click here: `http://127.0.0.1:8000/admin`
 
 #### Admin Credentials
 
-email: admin@admin.com
-password: admin@123
+- email: admin@admin.com
+- password: admin@123
 
 Note: There are also lots of REST APIs available that you can check.
