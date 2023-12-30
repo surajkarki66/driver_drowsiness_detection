@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <title>Drowsiness Prediction</title>
+    <style>
+        .centered-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .box {
+            margin-top: 15px;
+            width: 100%;
+            max-width: 400px;
+            height: 280px;
+            background-color: #f2f2f2;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-file {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .custom-file-input {
+            width: 100%;
+        }
+
+        .mt-4,
+        .mt-3 {
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/"><i class="fas fa-moon fa-2x"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars fa-1x"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link text-light" href="/live_detection">Live detection</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4>Drowsiness Prediction</h4>
+                <p>(Upload an image of face to detect drowsiness)</p>
+                <h5 id="message" style="color:  {% if status == 'open' %}green{% else %}red{% endif %};">
+                    {{ message }}
+                </h5>
+            </div>
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-12 centered-div">
+                <div class="box" id="imageFrame">
+                    <i class="fas fa-camera fa-10x"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Upload Section -->
+        <form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="imageInput" name="image_data" accept="image/*"
+                            onchange="displayImage(this)" required />
+                        <label class="custom-file-label" for="imageInput">Choose an image</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predict Button -->
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary">Predict</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Optional Bootstrap and jQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const csrfToken = "{{ csrf_token }}";
+        function displayImage(input) {
+            document.getElementById("message").innerText = "";
+            var fileInput = input.files[0];
+            if (fileInput) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("imageFrame").innerHTML =
+                        '<img src="' +
+                        e.target.result +
+                        '" style="width: 100%; height: 100%;" />';
+                };
+                reader.readAsDataURL(fileInput);
+            }
+        }
+
+        function predictImage() {
+            let imageFrame = document.getElementById("imageFrame");
+            let imageData = imageFrame.querySelector("img").src;
+
+            let formData = new FormData();
+            formData.append("image_data", imageData);
+
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken,
+                },
+                body: formData,
+            });
+        }
+    </script>
+</body>
+
+</html>
