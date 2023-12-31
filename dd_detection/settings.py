@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -174,9 +176,33 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+# Swagger settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Driver Drowsiness Detection',
+    'DESCRIPTION': 'This is a deep learning application deployed using Django and it detect whether the human is active or sleepy assuming human is driving.',
+    'VERSION': '0.0.1',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'CAMELIZE_NAMES': True,
+    'SCHEMA_PATH_PREFIX': r'/api/{version}/',
+
+    # side car settings
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+
+    # OTHER SETTINGS
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "persistAuthorization": True,
+        "displayOperationId": True,
+    },
+
+}
 
 PASSWORD_RESET_TIMEOUT = 600  # 600 seconds
 
