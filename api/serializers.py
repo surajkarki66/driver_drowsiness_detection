@@ -131,3 +131,9 @@ class DrowsinessPredictionSerializer(serializers.Serializer):
 
     class Meta:
         fields = ['image_file',]
+
+class CsrfSerializer(serializers.Serializer):
+    csrf_token = serializers.CharField()
+
+    class Meta:
+        fields = ['csrf_token',]
