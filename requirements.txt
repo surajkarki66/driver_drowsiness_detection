@@ -16,7 +16,7 @@ pygame
 django-cors-headers
 Pillow
 django-environ
-urllib3==1.26.6
+urllib3==1.26.18
 psycopg2-binary
 drf-spectacular
 drf_spectacular_sidecar
