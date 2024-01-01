@@ -12,12 +12,12 @@ from pygame import mixer
 from .models import Log
 
 face_path = os.path.sep.join(
-    [str(settings.BASE_DIR), "assets/haarcascade_frontalface_alt.xml"])
+    [str(settings.BASE_DIR), "models/haarcascade_frontalface_alt.xml"])
 leye_path = os.path.sep.join(
-    [str(settings.BASE_DIR), "assets/haarcascade_lefteye_2splits.xml"])
+    [str(settings.BASE_DIR), "models/haarcascade_lefteye_2splits.xml"])
 reye_path = os.path.sep.join(
-    [str(settings.BASE_DIR), "assets/haarcascade_righteye_2splits.xml"])
-modelPath = os.path.sep.join([str(settings.BASE_DIR), "assets/cnnCat.h5"])
+    [str(settings.BASE_DIR), "models/haarcascade_righteye_2splits.xml"])
+modelPath = os.path.sep.join([str(settings.BASE_DIR), "models/dd_detection.h5"])
 sound_path = os.path.join(str(settings.BASE_DIR), "assets/alarm.wav")
 
 face = cv2.CascadeClassifier(face_path)
@@ -52,7 +52,6 @@ class FaceDetect(object):
         cv2.destroyAllWindows()
 
     def get_frame(self):
-        path = os.getcwd()
 
         # grab the frame from the threaded video stream
         frame = self.vs.read()

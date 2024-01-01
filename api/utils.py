@@ -32,11 +32,11 @@ def classify_image(image_data):
     img = img.astype(np.uint8)
 
     leye_path = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/haarcascade_lefteye_2splits.xml"])
+        [str(settings.BASE_DIR), "models/haarcascade_lefteye_2splits.xml"])
     reye_path = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/haarcascade_righteye_2splits.xml"])
+        [str(settings.BASE_DIR), "models/haarcascade_righteye_2splits.xml"])
     modelPath = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/cnnCat.h5"])
+        [str(settings.BASE_DIR), "models/dd_detection.h5"])
 
     leye = cv2.CascadeClassifier(leye_path)
     reye = cv2.CascadeClassifier(reye_path)

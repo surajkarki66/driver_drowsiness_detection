@@ -112,20 +112,17 @@ def classify_image(url):
 
     mixer.init()
     face_path = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/haarcascade_frontalface_alt.xml"])
+        [str(settings.BASE_DIR), "models/haarcascade_frontalface_alt.xml"])
     leye_path = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/haarcascade_lefteye_2splits.xml"])
+        [str(settings.BASE_DIR), "models/haarcascade_lefteye_2splits.xml"])
     reye_path = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/haarcascade_righteye_2splits.xml"])
+        [str(settings.BASE_DIR), "models/haarcascade_righteye_2splits.xml"])
     modelPath = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/cnnCat.h5"])
+        [str(settings.BASE_DIR), "models/dd_detection.h5"])
 
     face = cv2.CascadeClassifier(face_path)
     leye = cv2.CascadeClassifier(leye_path)
     reye = cv2.CascadeClassifier(reye_path)
-
-    modelPath = os.path.sep.join(
-        [str(settings.BASE_DIR), "assets/cnnCat.h5"])
 
     model = load_model(modelPath)
 
