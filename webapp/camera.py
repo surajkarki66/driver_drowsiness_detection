@@ -8,7 +8,8 @@ from imutils.video import FPS
 
 from django.conf import settings
 from keras.models import load_model
-from pygame import mixer
+
+from .utils import play_wav
 from .models import Log
 
 face_path = os.path.sep.join(
@@ -29,10 +30,6 @@ lbl = ['Close', 'Open']
 model = load_model(modelPath)
 
 
-mixer.init()
-sound = mixer.Sound(sound_path)
-
-
 class FaceDetect(object):
     font = cv2.FONT_HERSHEY_COMPLEX_SMALL
     score = 0
@@ -43,7 +40,7 @@ class FaceDetect(object):
     def __init__(self, request):
         self.user = request.user
         # initialize the video stream, then allow the camera sensor to warm up
-        self.vs = VideoStream(src=200, resolution=(400, 590)).start()
+        self.vs = VideoStream(src=0, resolution=(400, 590)).start()
         # start the FPS throughput estimator
         self.fps = FPS().start()
 
@@ -117,7 +114,7 @@ class FaceDetect(object):
             log_instance.save_opencv_frame(frame)
 
             try:
-                sound.play()
+                play_wav(sound_path)
 
             except:
                 pass

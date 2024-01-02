@@ -12,12 +12,9 @@ imutils
 opencv-python
 keras 
 tensorflow
-pygame
 django-cors-headers
 Pillow
 django-environ
-urllib3==1.26.6
-psycopg2-binary
 drf-spectacular
 drf_spectacular_sidecar
-gunicorn
+simpleaudio

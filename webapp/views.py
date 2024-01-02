@@ -8,7 +8,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import StreamingHttpResponse
-from pygame import mixer
 from django.shortcuts import render
 
 from .camera import FaceDetect
@@ -110,7 +109,6 @@ def detect_drowsiness(request):
 def classify_image(url):
     img = cv2.imread(url)
 
-    mixer.init()
     face_path = os.path.sep.join(
         [str(settings.BASE_DIR), "models/haarcascade_frontalface_alt.xml"])
     leye_path = os.path.sep.join(
